@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const componenteSequelize = new Sequelize('dbExpress', 'root', '', {
+const componenteSequelize = new Sequelize('dbsistema', 'root', '', {
     dialect: 'mysql',
     host: 'localhost',
 });

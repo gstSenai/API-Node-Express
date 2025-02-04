@@ -1,29 +1,25 @@
 const Sequelize = require('sequelize');
 
-const database = require('./db');
+const database = require('../Repository/db');
 
-const Imagem = database.define('Imagem', {
+const Usuario = database.define('Usuario', {
     Id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    referencia: {
+    nome: {
         type: Sequelize.STRING,
         allowNull: false
     },
     data_criacao: {
         type: Sequelize.DATE,
         allowNull: false
-    },
-    titulo: {
-        type: Sequelize.STRING,
-        allowNull: false
     }
 }, {
-    tableName: 'Imagem', 
+    tableName: 'Usuario', 
     timestamps: false     
 });
 
-module.exports = Imagem;
+module.exports = Usuario;
