@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const userController = require("../Controller/userController");
 const imageController = require("../Controller/imageController");
+const awsController = require("../Controller/awsController");
 
 router.post("/add_user",userController.addUser);
 router.get("/get_user/:nome", userController.getUser);
@@ -15,5 +16,8 @@ router.get("/get_image/:titulo", imageController.getImage);
 router.get("/get_all_images", imageController.getAllImage);
 router.delete("/delete_image/:titulo", imageController.deleteImage);
 router.put("/put_image/:Id", imageController.putImage);
+
+router.put("/upload_file", awsController.uploadFile);
+router.put("/download_file", awsController.downloadFile);
 
 module.exports = router;

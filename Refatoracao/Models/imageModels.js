@@ -1,8 +1,7 @@
 const Sequelize = require('sequelize');
-
 const database = require('../Repository/db');
 
-const Imagem = database.define('Imagem', {
+const Imagem = database.define('tb_imagem', {
     Id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -20,9 +19,13 @@ const Imagem = database.define('Imagem', {
     titulo: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    id_usuario: {
+        type: Sequelize.INTEGER,
+        allowNull: false 
     }
 }, {
-    tableName: 'Imagem', 
+    tableName: 'tb_imagem', 
     timestamps: false     
 });
 

@@ -2,8 +2,8 @@ const imageService = require("../Service/imageService");
 
 const addImage = async (req, res) => {
     try {
-        const { referencia, data_criacao, titulo } = req.body;
-        const novaImagem = await imageService.createImage(referencia, data_criacao, titulo)
+        const { referencia, data_criacao, titulo, id_usuario } = req.body;
+        const novaImagem = await imageService.createImage(referencia, data_criacao, titulo, id_usuario)
 
         res.status(201).json({
             message: "Imagem Criada com Sucesso",

@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 const database = require('../Repository/db');
 
-const Usuario = database.define('Usuario', {
+const Usuario = database.define('tb_usuario', {
     Id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -18,7 +18,7 @@ const Usuario = database.define('Usuario', {
         allowNull: false
     }
 }, {
-    tableName: 'Usuario', 
+    tableName: 'tb_usuario', 
     timestamps: false     
 });
 
