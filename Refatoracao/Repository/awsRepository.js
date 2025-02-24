@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const uploadFile = async(filePath, bucketName, keyName) => {
     const fileContent = fs.readFileSync(filePath);
-
+    
     const params = {
         Bucket: bucketName,
         Key: keyName,

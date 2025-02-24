@@ -17,7 +17,7 @@ router.get("/get_all_images", imageController.getAllImage);
 router.delete("/delete_image/:titulo", imageController.deleteImage);
 router.put("/put_image/:Id", imageController.putImage);
 
-router.put("/upload_file", awsController.uploadFile);
-router.put("/download_file", awsController.downloadFile);
+router.post("/upload_file", awsController.uploadFile);
+router.post("/download_file", awsController.downloadFile);
 
 module.exports = router;

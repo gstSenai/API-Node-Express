@@ -1,47 +1,24 @@
-const userModels = require("../Models/userModels");
+const S3Repository = require('../Repository/awsRepository');
 
-const createUser = async (nome, data_criacao) => {
-    const dataCriacao = data_criacao || new Date().toISOString();
+const uploadFile = async (filePath, bucketName, keyName) => {
+    try {
+        const result = await S3Repository.uploadFile(filePath, bucketName, keyName);
+        return result.Location;
+    } catch (error) {
+        throw new Error("Não foi possivel fazer upload");
+    }
+};
 
-    return await userModels.create({
-        nome: nome,
-        data_criacao: dataCriacao,
-    });
-}
-
-const findUserByTitle = async (nome) => {
-    return await userModels.findOne({ where: { nome } });
-}
-
-const findAllUser = async () => {
-    return await userModels.findAll();
-}
-
-const updateUserById = async (id, referencia, data_criacao, titulo) => {
-    const user = await imageModels.findByPk(id);
-
-    if (!user) throw new Error('Usuario não encontrada')
-
-    return await userModels.update({
-        referencia: referencia || user.referencia,
-        data_criacao: data_criacao || user.data_criacao,
-        titulo: titulo || user.data_criacao
-    })
-}
-
-const deleteUserById = async (nome) => {
-    const user = await userModels.findOne({ where: { nome } });
-
-    if (!user) throw new Error('Usuario não Encontrada')
-
-    await user.destroy();
-    return user;
-}
+const downloadFile = async (bucketName, keyName, downloadPath) => {
+    try {
+        const result = await S3Repository.downloadFile(bucketName, keyName, downloadPath);
+        return result;
+    } catch (error) {
+        throw new Error("Não foi possivel fazer download");
+    }
+};
 
 module.exports = {
-    createUser,
-    findUserByTitle,
-    findAllUser,
-    updateUserById,
-    deleteUserById
-}
+    uploadFile,
+    downloadFile
+};

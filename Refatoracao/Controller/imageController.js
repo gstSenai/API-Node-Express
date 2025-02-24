@@ -1,18 +1,24 @@
-const imageService = require("../Service/imageService");
+const S3Service = require('../Service/awsService');
+const imageService = require('../Service/imageService');
 
 const addImage = async (req, res) => {
     try {
-        const { referencia, data_criacao, titulo, id_usuario } = req.body;
-        const novaImagem = await imageService.createImage(referencia, data_criacao, titulo, id_usuario)
+        const { filePath, bucketName, titulo, id_usuario } = req.body;
+
+        const { url, keyName } = await S3Service.uploadFile(filePath, bucketName);
+
+        const novaImagem = await imageService.createImage(keyName, new Date().toISOString(), titulo, id_usuario);
 
         res.status(201).json({
-            message: "Imagem Criada com Sucesso",
-            dados: novaImagem
+            message: "Arquivo Carregado e Registro Criado com Sucesso",
+            url: url,
+            imagem: novaImagem
         });
     } catch (error) {
+        console.error("Erro no upload ou criação do registro:", error);
         res.status(500).json({ error: error.message || "Erro inesperado" });
     }
-}
+};
 
 const getImage = async (req, res) => {
     const { titulo } = req.params;
